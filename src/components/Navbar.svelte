@@ -8,7 +8,7 @@
             <a href="/"><li>Home</li></a>
     </div>
     <div class="rightNav">
-        <a style="margin-right: 15px;" href="/"><li>Profile</li></a>
+        <a style="margin-right: 15px;" href="/profile"><li>Profile</li></a>
     </div>
 </nav>
 
