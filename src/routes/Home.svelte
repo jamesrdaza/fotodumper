@@ -1,9 +1,19 @@
 <script lang="ts">
   import Navbar from "../components/Navbar.svelte"
+  import { onMount } from "svelte"; 
+
+  let resJson;
+  onMount(async () => {
+    let test = await fetch("http://localhost:3000/testLogin", {
+      credentials: "include"
+    });
+    resJson = await test.json();
+    console.log(resJson.name);
+  })
 </script>
 
 <main>
-  <Navbar />
+  <Navbar username={resJson ? resJson.name : "test"}/>
   <div class="content">
     <div class="upload">
       <button id="UploadButton">Upload an Image</button>

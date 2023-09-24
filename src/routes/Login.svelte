@@ -1,0 +1,1 @@
+<a class="" href="http://localhost:3000/login/federated/google">Sign in with Google</a>

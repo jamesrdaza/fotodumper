@@ -1,5 +1,5 @@
 <script>
-
+    export let username = "Profile";
 </script>
 
 <nav>
@@ -8,7 +8,7 @@
             <a href="/"><li>Home</li></a>
     </div>
     <div class="rightNav">
-        <a style="margin-right: 15px;" href="/profile"><li>Profile</li></a>
+        <a style="margin-right: 15px;" href="/profile"><li>{username}</li></a>
     </div>
 </nav>
 
