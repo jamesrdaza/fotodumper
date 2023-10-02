@@ -1,10 +1,35 @@
 <script lang="ts">
   import Navbar from "../components/Navbar.svelte"
   import { onMount } from "svelte"; 
+  
+  // Element References
+  let image: HTMLImageElement;
+  let imageFile: HTMLInputElement;
 
-  let resJson;
+  function changePreviewSource() {
+    const [file] = imageFile.files;
+    if(file) {
+      image.src = URL.createObjectURL(file);
+    }
+  }
+
+  const submitImage = async (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append("image", imageFile.files[0])
+
+    await fetch("http://localhost:3000/fotos", {
+      method: "POST",
+      credentials: "include",
+      body: formData
+    });
+  }
+
+  // Declare Type Later
+  let resJson: any;
+
   onMount(async () => {
-    let test = await fetch("http://localhost:3000/testLogin", {
+    let test = await fetch("http://localhost:3000/user", {
       credentials: "include"
     });
     resJson = await test.json();
@@ -13,10 +38,14 @@
 </script>
 
 <main>
-  <Navbar username={resJson ? resJson.name : "test"}/>
+  <Navbar username={resJson ? resJson.name : "Profile"}/>
   <div class="content">
     <div class="upload">
-      <button id="UploadButton">Upload an Image</button>
+      <form on:submit={submitImage} >
+        <input type="file" id="image" accept="image/png, image/jpeg" bind:this={imageFile} on:change={changePreviewSource}>
+        <button id="UploadButton" type="submit">Upload an Image</button>
+        <img src="#" alt="preview" bind:this={image}>
+      </form>
     </div>
   </div>
 </main>
