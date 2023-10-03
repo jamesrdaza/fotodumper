@@ -7,11 +7,11 @@
   import type { ComponentType } from "svelte";
   
   let page: ComponentType; 
-  let params;
+  let params = {};
 
-  router("/", (ctx, next) => { params = {}; next(); }, () =>(page = Home));
-  router("/profile", (ctx, next) => { params = {}; next(); }, () => (page = Login));
-  router("/profile/:user", (ctx, next) => { params = ctx.params; next(); }, () => (page = Profile));
+  router("/", () =>(page = Home));
+  router("/profile", () => (page = Login));
+  router("/profile/:user", () => (page = Profile));
   router("/fotos/:foto", (ctx, next) => { params = ctx.params; next(); }, () => (page = Foto))
   
   router.start();
