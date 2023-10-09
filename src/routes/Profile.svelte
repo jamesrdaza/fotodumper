@@ -1,11 +1,5 @@
 <script>
     import { onMount } from "svelte";
-
-    export let params;
-
-    const getId = async() => {
-        console.log(params.user)
-    };
     
     let fotosArray = [];
     
@@ -16,6 +10,7 @@
         fotosArray = await fotos.json();
     });
 </script>
+
 Profile
 
 {#each fotosArray as foto}

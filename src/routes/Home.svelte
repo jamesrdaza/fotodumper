@@ -36,42 +36,23 @@
     }
   }
 
-  // Declare Type Later
-  let resJson: any;
-
-  onMount(async () => {
-    let test = await fetch("http://localhost:3000/user", {
-      credentials: "include"
-    });
-    resJson = await test.json();
-  })
 </script>
 
-<main>
-  <Navbar username={resJson ? resJson.name : "Profile"}/>
-  <div class="content">
-    <div class="upload">
-      <form on:submit={submitImage} >
-        <input type="file" id="image" accept="image/png, image/jpeg" bind:this={imageFile} on:change={changePreviewSource}>
-        <label for="title">Title</label>
-        <input type="text" name="title" bind:this={title}>
-        <label for="description">Description</label>
-        <input type="text" name="description" bind:this={description}>
-        <button id="UploadButton" type="submit">Upload an Image</button>
-        <img src="#" alt="preview" bind:this={image}>
-      </form>
-    </div>
+<div class="content">
+  <div class="upload">
+    <form on:submit={submitImage} >
+      <input type="file" id="image" accept="image/png, image/jpeg" bind:this={imageFile} on:change={changePreviewSource}>
+      <label for="title">Title</label>
+      <input type="text" name="title" bind:this={title}>
+      <label for="description">Description</label>
+      <input type="text" name="description" bind:this={description}>
+      <button id="UploadButton" type="submit">Upload an Image</button>
+      <img src="#" alt="preview" bind:this={image}>
+    </form>
   </div>
-</main>
+</div>
 
 <style>
-  main {
-    min-height: 100vh;
-    width: 100%;
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-  }
-  
   .content {
     height: calc(100vh - 60px);
     grid-column: span 12;
@@ -86,6 +67,10 @@
     
     justify-content: center;
     align-items: center;
+  }
+  
+  form {
+    
   }
   
   #UploadButton {
