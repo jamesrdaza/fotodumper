@@ -8,7 +8,7 @@
             <a href="/"><li>Home</li></a>
     </div>
     <div class="rightNav">
-        <a style="margin-right: 15px;" href={username === "Profile" ? "/profile" : `profile/${username}`}><li>{username}</li></a>
+        <a style="margin-right: 15px;" href={username === "Profile" ? "http://localhost:5173/profile" : `http://localhost:5173/profile/${username}`}><li>{username}</li></a>
     </div>
 </nav>
 

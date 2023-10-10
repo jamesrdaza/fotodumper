@@ -8,7 +8,10 @@
   let title: HTMLInputElement;
   let description: HTMLInputElement;
 
+  let show: boolean = false;
+
   function changePreviewSource() {
+    show = true;
     const [file] = imageFile.files;
     if(file) {
       image.src = URL.createObjectURL(file);
@@ -28,6 +31,7 @@
       credentials: "include",
       body: formData
     });
+    
     if (response.status === 200) {
      console.log(response.status); 
       let responseJson = await response.json();
@@ -36,18 +40,33 @@
     }
   }
 
+  // Declare Type Later
+  let resJson: any;
+
+  onMount(async () => {
+    let test = await fetch("http://localhost:3000/user", {
+      credentials: "include"
+    });
+    resJson = await test.json();
+  })
 </script>
 
 <div class="content">
   <div class="upload">
     <form on:submit={submitImage} >
       <input type="file" id="image" accept="image/png, image/jpeg" bind:this={imageFile} on:change={changePreviewSource}>
-      <label for="title">Title</label>
-      <input type="text" name="title" bind:this={title}>
-      <label for="description">Description</label>
-      <input type="text" name="description" bind:this={description}>
-      <button id="UploadButton" type="submit">Upload an Image</button>
-      <img src="#" alt="preview" bind:this={image}>
+      {#if show}
+        <div class="textSubmit">
+          <label for="title">Title</label>
+          <input type="text" name="title" bind:this={title}>
+        </div>
+        <div class="textSubmit">
+          <label for="description">Description</label>
+          <input type="text" name="description" bind:this={description}>
+        </div>
+        <button id="UploadButton" type="submit">Upload an Image</button>
+      {/if}
+      <img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs%3D" alt="preview" bind:this={image}>
     </form>
   </div>
 </div>
@@ -58,19 +77,39 @@
     grid-column: span 12;
     
     display: flex;
+    justify-content: center;
   }
   
   .upload {
-    height: 35%;
-    width: 100%;
+    height: 65%;
+    width: 35%;
     display: flex;
+    margin-top: 10px;
     
     justify-content: center;
     align-items: center;
+    
+    border: 1px solid black;
+    border-radius: 15px;
   }
   
   form {
-    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  .textSubmit {
+    width: 100%;
+  }
+  
+  label {
+    text-align: left;
+    clear: both;
+    margin-right: 10px;
+    float: left;
+    width: 25%;
   }
   
   #UploadButton {
