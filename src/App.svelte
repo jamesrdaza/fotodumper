@@ -1,5 +1,6 @@
 <script lang="ts">
   import router from "page"
+  import Upload from "./routes/Upload.svelte"
   import Home from "./routes/Home.svelte"
   import Profile from "./routes/Profile.svelte"
   import Login from "./routes/Login.svelte";
@@ -22,6 +23,7 @@
   let params = {};
 
   router("/", () =>(page = Home));
+  router("/upload", () =>(page = Upload));
   router("/profile", () => (page = Login));
   router("/profile/:user", (ctx, next) => { params = ctx.params; next(); }, () => (page = Profile));
   router("/fotos/:foto", (ctx, next) => { params = ctx.params; next(); }, () => (page = Foto))

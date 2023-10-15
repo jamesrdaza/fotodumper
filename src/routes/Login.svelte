@@ -18,9 +18,10 @@
         height: 20px;
         padding: 10px;
         border: 1px solid black;
-        background-color: #1a1a1a;
-        border-radius: 15px;
+        background-color: #4f87ea;
+        border-radius: 5px;
         transition: 0.25s;
+        line-height: 20px;
     }
     
     a:hover {

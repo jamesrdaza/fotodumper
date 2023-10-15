@@ -4,11 +4,16 @@
 
 <nav>
     <div class="leftNav">
-            <a style="margin-left: 15px;" href="/"><li>fotodumper</li></a>
-            <a href="/"><li>Home</li></a>
+            <a style="margin-left: 15px;" href="/">fotodumper</a>
+            <a href="/upload">Upload</a>
     </div>
     <div class="rightNav">
-        <a style="margin-right: 15px;" href={username === "Profile" ? "http://localhost:5173/profile" : `http://localhost:5173/profile/${username}`}><li>{username}</li></a>
+        <div style="margin-right: 15px; "class="dropdown">
+            <a href={username === "Profile" ? "http://localhost:5173/profile" : `http://localhost:5173/profile/${username}`}>{username}</a>
+            <div class="dropdownLinks">
+                <a class="link" href="http://localhost:3000/logout">Logout</a>
+            </div>
+        </div>
     </div>
 </nav>
 
@@ -38,4 +43,30 @@
     .rightNav {
         justify-content: right;
     }
+    
+    .dropdown {
+        position: relative;
+        z-index: 2;
+    }
+    .dropdownLinks {
+        display: none;
+        position: absolute;
+    }
+    .dropdown:hover .dropdownLinks {
+        display: block;
+    }
+    .link {
+        margin-top: 5px;
+        display: block;
+        border-radius: 5px;
+        height: 40px;
+        line-height: 40px;
+        padding: 2px;
+    } 
+    
+    .link {
+        border: 1px solid grey;
+    }
+
+    
 </style>
